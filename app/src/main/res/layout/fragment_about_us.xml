@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?colorOnPrimary"
+        android:layoutDirection="rtl">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.example.nikestore.view.NikeToolbar
+                android:id="@+id/aboutUsToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                app:nt_title="@string/about_us" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="150dp"
+                    android:layout_height="75dp"
+                    android:layout_marginTop="56dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_nike_logo"
+                    app:tint="?colorPrimary" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:justificationMode="inter_word"
+                    android:text="@string/about_us_text"
+                    android:textAppearance="?textAppearanceBody1"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView"
+                    app:layout_constraintStart_toStartOf="@+id/imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView"
+                    tools:targetApi="o" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="64dp"
+                    app:layout_constraintStart_toStartOf="@+id/textView4"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4"
+                    app:srcCompat="@drawable/ic_round_phone_enabled_24"
+                    app:tint="?colorSecondary" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/call_center"
+                    android:textAppearance="?textAppearanceBody1"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                    app:layout_constraintStart_toEndOf="@+id/imageView2"
+                    app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="32dp"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView2"
+                    app:layout_constraintStart_toStartOf="@+id/imageView2"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView2"
+                    app:srcCompat="@drawable/ic_round_mail_24"
+                    app:tint="?colorSecondary" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/webSite"
+                    android:textAppearance="?textAppearanceBody1"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+                    app:layout_constraintStart_toEndOf="@+id/imageView3"
+                    app:layout_constraintTop_toTopOf="@+id/imageView3" />
+
+                <TextView
+                    android:id="@+id/fragmentAboutUs_webSiteAddressTextTV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nike_webSite_address"
+                    android:textAppearance="?textAppearanceHeadline6"
+                    android:fontFamily="@font/primary_extra_bold"
+                    android:textColor="?colorPrimary"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView6"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView6"
+                    app:layout_constraintTop_toTopOf="@+id/textView6"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/fragmentAboutUs_telNumberTextTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="@string/nike_tel"
+                    android:textAppearance="?textAppearanceHeadline6"
+                    android:fontFamily="@font/primary_extra_bold"
+                    android:textColor="?colorPrimary"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.485"
+                    app:layout_constraintStart_toEndOf="@+id/textView5"
+                    app:layout_constraintTop_toTopOf="@+id/textView5"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/fragmentAboutUs_reportFileButton"
+                    android:layout_width="180dp"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="32dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView6"
+                    android:backgroundTint="?colorSecondary"
+                    android:text="@string/error_logs"
+                    app:cornerRadius="15dp"
+                    android:layout_marginEnd="4dp"
+                    app:icon="@drawable/ic_round_bug_report_24"
+                    app:iconPadding="-8dp" />
+
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="@string/social_networks"
+                    android:textAppearance="?textAppearanceBody1"
+                    app:layout_constraintEnd_toEndOf="@+id/fragmentAboutUs_reportFileButton"
+                    app:layout_constraintStart_toStartOf="@+id/fragmentAboutUs_reportFileButton"
+                    app:layout_constraintTop_toBottomOf="@+id/fragmentAboutUs_reportFileButton" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="120dp"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="8dp"
+                    android:background="?colorPrimary"
+                    app:layout_constraintEnd_toEndOf="@+id/textView8"
+                    app:layout_constraintStart_toStartOf="@+id/textView8"
+                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="@+id/view"
+                    app:layout_constraintStart_toStartOf="@+id/view"
+                    app:layout_constraintTop_toBottomOf="@+id/view">
+
+                    <ImageView
+                        android:id="@+id/fragmentAboutUs_faceBookButtonIv"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginEnd="4dp"
+                        app:srcCompat="@drawable/facebook"
+                        app:tint="@color/blue" />
+
+                    <ImageView
+                        android:id="@+id/fragmentAboutUs_instagramButtonIv"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:srcCompat="@drawable/instagram"
+                        app:tint="@color/yellow" />
+
+                    <ImageView
+                        android:id="@+id/fragmentAboutUs_youtubeButtonIv"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:srcCompat="@drawable/youtube"
+                        app:tint="@color/dark_red"/>
+
+                    <ImageView
+                        android:id="@+id/fragmentAboutUs_twitterButtonIv"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="4dp"
+                        app:srcCompat="@drawable/twitter"
+                        app:tint="@color/black"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+                    android:gravity="center"
+                    android:text="کلیه حقوق اپلیکشن متعلق به شرکت \nنـــــــــــایـــــــــــــــــــــــــــــک می باشد"
+                    android:fontFamily="@font/primary_bold"
+                    android:textAppearance="?textAppearanceHeadline6"
+                    app:layout_constraintEnd_toEndOf="@+id/linearLayout20"
+                    app:layout_constraintStart_toStartOf="@+id/linearLayout20"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout20" />
+
+                <TextView
+                    android:id="@+id/fragmentAboutUs_versionTextTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/primary_bold"
+                    android:textAppearance="?textAppearanceHeadline6"
+                    android:textSize="24sp"
+                    android:textColor="?colorPrimary"
+                    app:layout_constraintEnd_toEndOf="@+id/textView9"
+                    app:layout_constraintStart_toStartOf="@+id/textView9"
+                    app:layout_constraintTop_toBottomOf="@+id/textView9"
+                    tools:text="نسخه 2.0.0.5" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

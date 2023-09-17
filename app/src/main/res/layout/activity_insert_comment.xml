@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layoutDirection="rtl"
+        tools:context=".feature.product.comment.InsertCommentActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="MissingConstraints">
+
+            <com.example.nikestore.view.NikeToolbar
+                android:id="@+id/commentListToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                app:nt_title="ثبت نظر" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/titleTIL"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:hint="عنوان"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/titleTIET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:gravity="start"
+                android:inputType="textNoSuggestions"
+                android:selectAllOnFocus="true"
+                android:textAppearance="?textAppearanceBody2"
+                android:textColor="?colorSecondary"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/contentTIL"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:hint="متن"
+            app:layout_constraintTop_toBottomOf="@+id/titleTIL">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/contentTIET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:layout_margin="4dp"
+                android:gravity="start"
+                android:inputType="textMultiLine"
+                android:minLines="10"
+                android:selectAllOnFocus="true"
+                android:textAppearance="?textAppearanceBody1"
+                android:textColor="?colorSecondary"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/sendCommentBtn"
+            android:layout_width="@dimen/authViewWidth"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minHeight="48dp"
+            android:text="ثبت"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/contentTIL" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

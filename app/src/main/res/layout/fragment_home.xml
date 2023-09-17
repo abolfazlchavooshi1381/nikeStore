@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:aandroid="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layoutDirection="rtl">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/ic_launcher_round" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="12dp"
+                    android:textAppearance="?textAppearanceHeadline5"
+                    android:text="@string/app_name"
+                    android:layout_gravity="bottom|center" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_search_bar"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_gravity="end">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/searchBtn"
+                        android:layout_width="match_parent"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_height="48dp"
+                        android:padding="16dp"
+                        android:drawableStart="@drawable/ic_search"
+                        android:drawablePadding="16dp"
+                        android:hint="@string/search"
+                        android:focusable="false"
+                        android:layoutDirection="rtl"
+                        android:selectAllOnFocus="true"
+                        android:textAppearance="?textAppearanceBody1" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.cardview.widget.CardView
+                        app:cardCornerRadius="6dp"
+                        android:layout_margin="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/bannerSliderViewPager"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="16dp" />
+
+                    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                        android:id="@+id/sliderIndicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center_horizontal"
+                        android:layout_marginBottom="12dp"
+                        app:dotsColor="#E0DCDC"
+                        app:dotsCornerRadius="8dp"
+                        app:dotsSize="5dp"
+                        app:dotsSpacing="3dp"
+                        app:dotsWidthFactor="4"
+                        app:progressMode="false"
+                        app:selectedDotColor="@color/black" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    style="@style/HomeLinks">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/latest"
+                        android:layout_gravity="center_vertical|start"
+                        android:textAppearance="?textAppearanceHeadline5" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/viewLatestProductsBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/viewAll"
+                        android:textAppearance="?textAppearanceHeadline6"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_gravity="center_vertical|end" />
+                </FrameLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/latestProductsRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    aandroid:padding="12dp"
+                    android:clipToPadding="false" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?colorPrimary"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/popular"
+                        android:layout_gravity="center_vertical|start"
+                        android:textColor="?colorOnPrimary"
+                        android:textAppearance="?textAppearanceHeadline5" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/viewPopularProductsBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/viewAll"
+                        android:textAppearance="?textAppearanceHeadline6"
+                        android:textColor="?colorOnPrimary"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_gravity="center_vertical|end" />
+                </FrameLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/popularProductsRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?colorPrimary"
+                    android:padding="12dp"
+                    android:clipToPadding="false" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/expensive"
+                        android:layout_gravity="center_vertical|start"
+                        android:textAppearance="?textAppearanceHeadline5" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/viewExpensiveProductsBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/viewAll"
+                        android:textAppearance="?textAppearanceHeadline6"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_gravity="center_vertical|end" />
+                </FrameLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/expensiveProductsRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:clipToPadding="false" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cheapest"
+                        android:layout_gravity="center_vertical|start"
+                        android:textAppearance="?textAppearanceHeadline5" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/viewCheapestProductsBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/viewAll"
+                        android:textAppearance="?textAppearanceHeadline6"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_gravity="center_vertical|end" />
+                </FrameLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/cheapestProductsRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:clipToPadding="false" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

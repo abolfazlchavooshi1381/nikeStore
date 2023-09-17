@@ -1,0 +1,142 @@
+package com.example.nikestore.feature.product
+
+import android.content.Intent
+import android.graphics.Paint
+import android.os.Bundle
+import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.nikestore.R
+import com.example.nikestore.common.EXTRA_KEY_ID
+import com.example.nikestore.common.NikeActivity
+import com.example.nikestore.common.NikeCompletableObserver
+import com.example.nikestore.common.formatPrice
+import com.example.nikestore.data.Comment
+import com.example.nikestore.data.Product
+import com.example.nikestore.databinding.ActivityProductDetailBinding
+import com.example.nikestore.feature.common.LoadingDialog
+import com.example.nikestore.feature.list.ProductListAdapter
+import com.example.nikestore.feature.list.VIEW_TYPE_ROUND
+import com.example.nikestore.feature.product.comment.CommentAdapter
+import com.example.nikestore.feature.product.comment.CommentListActivity
+import com.example.nikestore.feature.product.comment.InsertCommentActivity
+import com.example.nikestore.services.ImageLoadingService
+import com.example.nikestore.view.scroll.ObservableScrollViewCallbacks
+import com.example.nikestore.view.scroll.ScrollState
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
+import timber.log.Timber
+
+
+class ProductDetailActivity : NikeActivity(), ProductListAdapter.ProductEventListener {
+
+    private lateinit var binding: ActivityProductDetailBinding
+    val productDetailViewModel: ProductDetailViewModel by viewModel { parametersOf(intent.extras) }
+    val imageLoadingService: ImageLoadingService by inject()
+    val productListAdapter: ProductListAdapter by inject { parametersOf(VIEW_TYPE_ROUND) }
+    val commentAdapter = CommentAdapter()
+    val compositeDisposable = CompositeDisposable()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        this.binding = ActivityProductDetailBinding.inflate(this.layoutInflater)
+        setContentView(binding.root)
+
+        loadingDialog.isCancelable = false
+        loadingDialog.show(supportFragmentManager, null)
+
+        productDetailViewModel.productLiveData.observe(this) {
+            imageLoadingService.load(this.binding.productIv, it.image)
+            this.binding.titleTv.text = it.title
+            this.binding.previousPriceTv.text = formatPrice(it.previous_price)
+            this.binding.previousPriceTv.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+            this.binding.currentPriceTv.text = formatPrice(it.price)
+            this.binding.toolbarTitleTv.text = it.title
+        }
+
+        this.binding.backBtn.setOnClickListener {
+            finish()
+        }
+
+        productDetailViewModel.commentsLiveData.observe(this) {
+            Timber.i(it.toString())
+            commentAdapter.comments = it as ArrayList<Comment>
+            loadingDialog.dismiss()
+            if (it.size > 3) {
+                this.binding.viewAllCommentsBtn.visibility = View.VISIBLE
+                this.binding.viewAllCommentsBtn.setOnClickListener {
+                    startActivity(Intent(this, CommentListActivity::class.java).apply {
+                        putExtra(EXTRA_KEY_ID, productDetailViewModel.productLiveData.value!!.id)
+                    })
+                }
+            }
+        }
+
+        this.binding.insertComment.setOnClickListener {
+            startActivity(Intent(this, InsertCommentActivity::class.java).apply {
+                putExtra(EXTRA_KEY_ID, productDetailViewModel.productLiveData.value!!.id)
+            })
+        }
+
+        initViews()
+
+    }
+
+    private fun initViews() {
+        this.binding.commentsRv.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        this.binding.commentsRv.adapter = commentAdapter
+        this.binding.commentsRv.isNestedScrollingEnabled = false
+
+        this.binding.productIv.post {
+            val productIvHeight = this.binding.productIv.height
+            val toolbar = this.binding.toolbarView
+            val productImageView = this.binding.productIv
+            this.binding.observableScrollView.addScrollViewCallbacks(object : ObservableScrollViewCallbacks {
+                override fun onScrollChanged(
+                    scrollY: Int,
+                    firstScroll: Boolean,
+                    dragging: Boolean
+                ) {
+                    Timber.i("productIv height is -> $productIvHeight")
+                    toolbar.alpha = scrollY.toFloat() / productIvHeight.toFloat()
+                    productImageView.translationY = scrollY.toFloat() / 2
+                }
+
+                override fun onDownMotionEvent() {
+                }
+
+                override fun onUpOrCancelMotionEvent(scrollState: ScrollState?) {
+                }
+
+            })
+        }
+        this.binding.addToCartBtn.setOnClickListener {
+            productDetailViewModel.onAddToCartBtn()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : NikeCompletableObserver(compositeDisposable) {
+                    override fun onComplete() {
+                        showToast(this@ProductDetailActivity, getString(R.string.success_addToCart))
+//                        showSnackBar(binding.root, getString(R.string.success_addToCart))
+                    }
+                })
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable.clear()
+    }
+
+    override fun onProductClick(product: Product) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onFavoriteBtnClick(product: Product) {
+        productDetailViewModel.addProductToFavorites(product)
+    }
+}
