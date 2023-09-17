@@ -60,8 +60,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             tools:text="TextView"
-            android:textSize="16sp"
             android:textAppearance="?textAppearanceBody1"
+            android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/productIv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

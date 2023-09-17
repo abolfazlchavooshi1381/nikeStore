@@ -2,15 +2,19 @@ package com.example.nikestore.feature.common.search
 
 import android.content.Intent
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.nikestore.feature.common.LoadingDialog
 import com.example.nikestore.R
 import com.example.nikestore.common.EXTRA_KEY_DATA
 import com.example.nikestore.common.NikeActivity
+import com.example.nikestore.common.REQUEST_CODE_SPEECH_INPUT
 import com.example.nikestore.common.convertPersianNumbersToEnglish
+import com.example.nikestore.common.onSpeechButtonClicked
 import com.example.nikestore.data.Product
 import com.example.nikestore.databinding.ActivitySearchBinding
 import com.example.nikestore.databinding.ActivityStartBinding
@@ -21,6 +25,7 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import timber.log.Timber
+import java.util.Objects
 
 class SearchActivity : NikeActivity(), ProductListAdapter.ProductEventListener {
 
@@ -56,16 +61,47 @@ class SearchActivity : NikeActivity(), ProductListAdapter.ProductEventListener {
             finish()
         }
 
-        this.binding.searchBtn.addTextChangedListener(object : TextWatcher {
+        this.binding.voiceSearchIv.setOnClickListener {
+            try {
+                startActivityForResult(onSpeechButtonClicked(), REQUEST_CODE_SPEECH_INPUT)
+            } catch (e: Exception) {
+                Toast
+                    .makeText(
+                        this, " " + e.message,
+                        Toast.LENGTH_SHORT
+                    )
+                    .show()
+            }
+        }
+
+        this.binding.searchEt.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
 
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-                productListAdapter.search(charSequence.toString().convertPersianNumbersToEnglish())
+                productListAdapter.search(charSequence.toString().convertPersianNumbersToEnglish().lowercase())
             }
 
             override fun afterTextChanged(editable: Editable) {}
         })
 
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(
+        requestCode: Int, resultCode: Int,
+        data: Intent?
+    ) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_SPEECH_INPUT) {
+            if (resultCode == RESULT_OK && data != null) {
+                val result = data.getStringArrayListExtra(
+                    RecognizerIntent.EXTRA_RESULTS
+                )
+                this.binding.searchEt.setText(
+                    Objects.requireNonNull(result)?.get(0)
+                )
+            }
+        }
     }
 
     override fun onProductClick(product: Product) {

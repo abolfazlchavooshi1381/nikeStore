@@ -98,6 +98,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
                     style="@style/HomeLinks">
@@ -107,7 +108,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/latest"
                         android:layout_gravity="center_vertical|start"
-                        android:textAppearance="?textAppearanceHeadline6" />
+                        android:textAppearance="?textAppearanceHeadline6"
+                        android:textStyle="bold"/>
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/viewLatestProductsBtn"
@@ -130,6 +132,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?colorPrimary"
+                    android:layout_marginTop="12dp"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp">
 
@@ -139,7 +142,8 @@
                         android:text="@string/popular"
                         android:layout_gravity="center_vertical|start"
                         android:textColor="?colorOnPrimary"
-                        android:textAppearance="?textAppearanceHeadline6" />
+                        android:textAppearance="?textAppearanceHeadline6"
+                        android:textStyle="bold"/>
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/viewPopularProductsBtn"
@@ -164,14 +168,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="16dp"
-                    android:paddingEnd="16dp">
+                    android:paddingEnd="16dp"
+                    android:layout_marginTop="12dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/expensive"
                         android:layout_gravity="center_vertical|start"
-                        android:textAppearance="?textAppearanceHeadline6" />
+                        android:textAppearance="?textAppearanceHeadline6"
+                        android:textStyle="bold"/>
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/viewExpensiveProductsBtn"
@@ -195,7 +201,8 @@
                     android:layout_height="wrap_content"
                     android:background="?colorSecondary"
                     android:paddingStart="16dp"
-                    android:paddingEnd="16dp">
+                    android:paddingEnd="16dp"
+                    android:layout_marginTop="12dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -203,7 +210,8 @@
                         android:text="@string/cheapest"
                         android:layout_gravity="center_vertical|start"
                         android:textAppearance="?textAppearanceHeadline6"
-                        android:textColor="?colorOnPrimary" />
+                        android:textColor="?colorOnPrimary"
+                        android:textStyle="bold"/>
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/viewCheapestProductsBtn"

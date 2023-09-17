@@ -21,6 +21,7 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import timber.log.Timber
+import java.util.Locale
 
 class ProductListActivity : NikeActivity(), ProductListAdapter.ProductEventListener {
 
@@ -99,7 +100,8 @@ class ProductListActivity : NikeActivity(), ProductListAdapter.ProductEventListe
         this.mainViewModel.cartItemsCountLiveData.observe(this) {
             val count = it.count
             if (count > 0) {
-                this.binding.badgeTv.text = count.toString()
+
+                this.binding.badgeTv.text = String.format(Locale.ENGLISH, count.toString())
                 this.binding.badgeTv.visibility = View.VISIBLE
             } else {
                 this.binding.badgeTv.visibility = View.GONE

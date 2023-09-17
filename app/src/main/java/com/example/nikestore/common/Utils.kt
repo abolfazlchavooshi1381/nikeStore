@@ -9,6 +9,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Build
+import android.speech.RecognizerIntent
 import android.text.SpannableString
 import android.text.style.RelativeSizeSpan
 import android.text.style.UnderlineSpan
@@ -212,4 +213,20 @@ fun checkInternetConnection(context: Context): Boolean {
         @Suppress("DEPRECATION")
         return networkInfo.isConnected
     }
+}
+
+fun onSpeechButtonClicked(): Intent{
+    val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+    intent.putExtra(
+        RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+        RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+    )
+    intent.putExtra(
+        RecognizerIntent.EXTRA_LANGUAGE,
+        Locale.getDefault()
+    )
+    intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak to text")
+    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "fa")
+
+    return intent
 }

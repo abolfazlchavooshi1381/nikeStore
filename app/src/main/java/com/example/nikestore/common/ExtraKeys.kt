@@ -6,3 +6,4 @@ const val AUTHENTICATION_REQUEST_PERMISSIONS = 9632
 const val PREFERENCES_NAME = "preferences"
 const val PREFERENCES_USER_NAME_PASSWORD = "login"
 const val USER_NAME_PASSWORD_KEY = "userNamePassword"
+const val REQUEST_CODE_SPEECH_INPUT = 6841

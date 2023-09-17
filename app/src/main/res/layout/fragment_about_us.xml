@@ -106,7 +106,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/nike_webSite_address"
                     android:textAppearance="?textAppearanceBody1"
-                    android:fontFamily="@font/primary_extra_bold"
+                    android:textStyle="bold"
                     android:textColor="?colorPrimary"
                     app:layout_constraintBottom_toBottomOf="@+id/textView6"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -121,7 +121,7 @@
                     android:gravity="end"
                     android:text="@string/nike_tel"
                     android:textAppearance="?textAppearanceBody1"
-                    android:fontFamily="@font/primary_extra_bold"
+                    android:textStyle="bold"
                     android:textColor="?colorPrimary"
                     app:layout_constraintBottom_toBottomOf="@+id/textView5"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -178,37 +178,37 @@
 
                     <ImageView
                         android:id="@+id/fragmentAboutUs_faceBookButtonIv"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_marginEnd="4dp"
-                        app:srcCompat="@drawable/facebook"
-                        app:tint="@color/blue" />
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginEnd="8dp"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/facebook" />
 
                     <ImageView
                         android:id="@+id/fragmentAboutUs_instagramButtonIv"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginEnd="4dp"
-                        app:srcCompat="@drawable/instagram"
-                        app:tint="@color/yellow" />
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/instagram" />
 
                     <ImageView
                         android:id="@+id/fragmentAboutUs_youtubeButtonIv"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginEnd="4dp"
-                        app:srcCompat="@drawable/youtube"
-                        app:tint="@color/dark_red"/>
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/youtube"/>
 
                     <ImageView
                         android:id="@+id/fragmentAboutUs_twitterButtonIv"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_marginStart="4dp"
-                        app:srcCompat="@drawable/twitter"
-                        app:tint="@color/black"/>
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginStart="8dp"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/twitter" />
                 </LinearLayout>
 
                 <TextView
@@ -218,7 +218,6 @@
                     android:layout_marginTop="35dp"
                     android:gravity="center"
                     android:text="کلیه حقوق اپلیکشن متعلق به شرکت \nنـــــــــــایـــــــــــــــــــــــــــــک می باشد"
-                    android:fontFamily="@font/primary_bold"
                     android:textAppearance="?textAppearanceBody1"
                     app:layout_constraintEnd_toEndOf="@+id/linearLayout20"
                     app:layout_constraintStart_toStartOf="@+id/linearLayout20"
@@ -229,8 +228,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:fontFamily="@font/primary_bold"
                     android:textAppearance="?textAppearanceBody1"
+                    android:textStyle="bold"
                     android:textColor="?colorPrimary"
                     app:layout_constraintEnd_toEndOf="@+id/textView9"
                     app:layout_constraintStart_toStartOf="@+id/textView9"

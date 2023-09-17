@@ -28,22 +28,37 @@
                 android:layout_height="1dp"
                 android:background="?dividerColor" />
 
-            <EditText
-                android:id="@+id/searchBtn"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/background_et_search"
-                android:drawableStart="@drawable/ic_search"
-                android:hint="جستجو"
-                android:paddingStart="12dp"
-                android:paddingEnd="16dp"
-                android:textColor="?colorSecondary"
-                android:textColorHint="?android:textColorSecondary"
-                android:textSize="15sp" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_search_bar"
+                android:layout_margin="4dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <EditText
+                    android:id="@+id/searchEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@android:color/transparent"
+                    android:drawableStart="@drawable/ic_search"
+                    android:drawablePadding="16dp"
+                    android:hint="جستجو کنید..."
+                    android:layoutDirection="rtl"
+                    android:selectAllOnFocus="true"
+                    android:textAlignment="viewStart"
+                    android:textAppearance="?textAppearanceBody1" />
+
+                <ImageView
+                    android:id="@+id/voiceSearchIv"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/ic_round_keyboard_voice_24"
+                    app:tint="?colorSecondary" />
+            </FrameLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
 
