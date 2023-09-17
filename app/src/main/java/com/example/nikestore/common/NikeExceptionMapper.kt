@@ -21,7 +21,6 @@ class NikeExceptionMapper {
                     Timber.e(exception)
                 }
             }
-
             return NikeException(NikeException.Type.SIMPLE, R.string.internet_error)
         }
     }

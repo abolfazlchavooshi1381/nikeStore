@@ -1,15 +1,20 @@
 package com.example.nikestore.feature.list
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.nikestore.R
 import com.example.nikestore.common.EXTRA_KEY_DATA
 import com.example.nikestore.common.NikeActivity
 import com.example.nikestore.data.Product
 import com.example.nikestore.databinding.ActivityProductListBinding
-import com.example.nikestore.feature.common.LoadingDialog
+import com.example.nikestore.feature.cart.CartFragment
+import com.example.nikestore.feature.main.MainViewModel
 import com.example.nikestore.feature.product.ProductDetailActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.android.ext.android.inject
@@ -27,8 +32,10 @@ class ProductListActivity : NikeActivity(), ProductListAdapter.ProductEventListe
             )
         )
     }
-    val productListAdapter: ProductListAdapter by inject { parametersOf(VIEW_TYPE_SMALL) }
+    private val mainViewModel: MainViewModel by viewModel()
+    private val productListAdapter: ProductListAdapter by inject { parametersOf(VIEW_TYPE_SMALL) }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.binding = ActivityProductListBinding.inflate(this.layoutInflater)
@@ -83,6 +90,26 @@ class ProductListActivity : NikeActivity(), ProductListAdapter.ProductEventListe
                 }.setTitle(getString(R.string.sort))
             dialog.show().window?.setBackgroundDrawableResource(R.drawable.background_dialog_fragment)
         }
+
+        this.binding.cartBtn.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .add(android.R.id.content, CartFragment()).commit()
+        }
+
+        this.mainViewModel.cartItemsCountLiveData.observe(this) {
+            val count = it.count
+            if (count > 0) {
+                this.binding.badgeTv.text = count.toString()
+                this.binding.badgeTv.visibility = View.VISIBLE
+            } else {
+                this.binding.badgeTv.visibility = View.GONE
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mainViewModel.getCartItemsCount()
     }
 
     override fun onProductClick(product: Product) {

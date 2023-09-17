@@ -45,7 +45,7 @@
                 android:gravity="start"
                 android:inputType="textNoSuggestions"
                 android:selectAllOnFocus="true"
-                android:textAppearance="?textAppearanceBody2"
+                android:textAppearance="?textAppearanceBody1"
                 android:textColor="?colorSecondary"/>
         </com.google.android.material.textfield.TextInputLayout>
 

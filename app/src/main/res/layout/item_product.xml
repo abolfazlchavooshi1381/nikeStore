@@ -36,7 +36,7 @@
             android:maxLines="2"
             android:ellipsize="end"
             android:minLines="2"
-            android:textAppearance="?textAppearanceBody1"
+            android:textAppearance="?textAppearanceBody2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/productIv"
             app:layout_constraintTop_toBottomOf="@+id/productIv" />

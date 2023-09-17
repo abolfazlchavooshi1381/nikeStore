@@ -34,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="12dp"
-                    android:textAppearance="?textAppearanceHeadline5"
+                    android:textAppearance="?textAppearanceHeadline6"
                     android:text="@string/app_name"
                     android:layout_gravity="bottom|center" />
 
@@ -59,7 +59,7 @@
                         android:focusable="false"
                         android:layoutDirection="rtl"
                         android:selectAllOnFocus="true"
-                        android:textAppearance="?textAppearanceBody1" />
+                        android:textAppearance="?textAppearanceBody2" />
                 </LinearLayout>
 
                 <FrameLayout
@@ -107,14 +107,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/latest"
                         android:layout_gravity="center_vertical|start"
-                        android:textAppearance="?textAppearanceHeadline5" />
+                        android:textAppearance="?textAppearanceHeadline6" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/viewLatestProductsBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/viewAll"
-                        android:textAppearance="?textAppearanceHeadline6"
+                        android:textAppearance="?textAppearanceBody1"
                         style="@style/Widget.Material3.Button.TextButton"
                         android:layout_gravity="center_vertical|end" />
                 </FrameLayout>
@@ -139,14 +139,14 @@
                         android:text="@string/popular"
                         android:layout_gravity="center_vertical|start"
                         android:textColor="?colorOnPrimary"
-                        android:textAppearance="?textAppearanceHeadline5" />
+                        android:textAppearance="?textAppearanceHeadline6" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/viewPopularProductsBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/viewAll"
-                        android:textAppearance="?textAppearanceHeadline6"
+                        android:textAppearance="?textAppearanceBody1"
                         android:textColor="?colorOnPrimary"
                         style="@style/Widget.Material3.Button.TextButton"
                         android:layout_gravity="center_vertical|end" />
@@ -171,14 +171,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/expensive"
                         android:layout_gravity="center_vertical|start"
-                        android:textAppearance="?textAppearanceHeadline5" />
+                        android:textAppearance="?textAppearanceHeadline6" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/viewExpensiveProductsBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/viewAll"
-                        android:textAppearance="?textAppearanceHeadline6"
+                        android:textAppearance="?textAppearanceBody1"
                         style="@style/Widget.Material3.Button.TextButton"
                         android:layout_gravity="center_vertical|end" />
                 </FrameLayout>
@@ -193,6 +193,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="?colorSecondary"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp">
 
@@ -201,14 +202,16 @@
                         android:layout_height="wrap_content"
                         android:text="@string/cheapest"
                         android:layout_gravity="center_vertical|start"
-                        android:textAppearance="?textAppearanceHeadline5" />
+                        android:textAppearance="?textAppearanceHeadline6"
+                        android:textColor="?colorOnPrimary" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/viewCheapestProductsBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/viewAll"
-                        android:textAppearance="?textAppearanceHeadline6"
+                        android:textAppearance="?textAppearanceBody1"
+                        android:textColor="?colorOnPrimary"
                         style="@style/Widget.Material3.Button.TextButton"
                         android:layout_gravity="center_vertical|end" />
                 </FrameLayout>
@@ -217,6 +220,7 @@
                     android:id="@+id/cheapestProductsRv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="?colorSecondary"
                     android:padding="12dp"
                     android:clipToPadding="false" />
             </LinearLayout>

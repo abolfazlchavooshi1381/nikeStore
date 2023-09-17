@@ -24,7 +24,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?textAppearanceBody1"
+                android:textAppearance="?textAppearanceBody2"
                 android:textStyle="bold"
                 android:layout_gravity="center_vertical|start"
                 android:text="@string/orderHistory_orderId" />
@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|end"
-                android:textAppearance="?textAppearanceBody1"
+                android:textAppearance="?textAppearanceBody2"
                 android:textStyle="bold" />
         </FrameLayout>
 
@@ -51,7 +51,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?textAppearanceBody1"
+                android:textAppearance="?textAppearanceBody2"
                 android:textStyle="bold"
                 android:layout_gravity="center_vertical|start"
                 android:text="@string/orderHistory_payable" />

@@ -49,6 +49,10 @@ abstract class NikeFragment : Fragment(), NikeView {
     override fun onStart() {
         super.onStart()
         EventBus.getDefault().register(this)
+        if (!checkInternetConnection(requireContext())) {
+            showToast(requireContext(), getString(R.string.internet_error))
+            loadingDialog.dismiss()
+        }
     }
 
     override fun onStop() {
@@ -69,6 +73,10 @@ abstract class NikeActivity : AppCompatActivity(), NikeView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         EventBus.getDefault().register(this)
+        if (!checkInternetConnection(this)) {
+            showToast(this, getString(R.string.internet_error))
+            loadingDialog.dismiss()
+        }
     }
 
     override fun onDestroy() {

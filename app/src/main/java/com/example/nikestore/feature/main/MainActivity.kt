@@ -12,7 +12,6 @@ import com.example.nikestore.common.convertDpToPixel
 import com.example.nikestore.common.setupWithNavController
 import com.example.nikestore.data.CartItemCount
 import com.example.nikestore.databinding.ActivityMainBinding
-import com.example.nikestore.databinding.ActivityStartBinding
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.color.MaterialColors
@@ -38,7 +37,7 @@ class MainActivity : NikeActivity() {
     override fun attachBaseContext(newBase: Context?) {
         super.attachBaseContext(newBase)
         val config = Configuration(newBase?.resources?.configuration)
-        config.fontScale = 0.75f
+        config.fontScale = 1f
         applyOverrideConfiguration(config)
     }
 
