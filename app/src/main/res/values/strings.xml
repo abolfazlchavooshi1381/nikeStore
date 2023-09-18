@@ -18,7 +18,7 @@
     <string name="sortPriceHighToLow">گران ترین</string>
     <string name="sortPriceLowToHigh">ارزان ترین</string>
     <string name="addToCart">افزودن به سبد خرید</string>
-    <string name="internet_error">خطای اتصال به اینترنت</string>
+    <string name="internet_error">متأسفانه اتصال برقرار نشد لطفاً مجدداً اتصال خود به اینترنت را بررسی نمایید.</string>
     <string name="success_addToCart">به سبد خرید اضافه شد</string>
     <string name="save_user_name_password">مرا به خاطر بسپار</string>
     <string name="user_name">نام کاربری</string>
