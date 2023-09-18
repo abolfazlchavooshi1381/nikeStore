@@ -25,7 +25,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:srcCompat="@drawable/no_image"
+            app:placeholderImage="@drawable/no_image"
+            android:layout_gravity="center"/>
 
         <TextView
             android:id="@+id/productTitleTv"

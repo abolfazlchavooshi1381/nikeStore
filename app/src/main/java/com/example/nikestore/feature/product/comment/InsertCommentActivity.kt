@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.example.nikestore.R
 import com.example.nikestore.common.EXTRA_KEY_ID
+import com.example.nikestore.common.NetworkUtils
 import com.example.nikestore.common.NikeActivity
 import com.example.nikestore.common.closeKeyboard
 import com.example.nikestore.databinding.ActivityInsertCommentBinding
@@ -27,6 +28,8 @@ class InsertCommentActivity : NikeActivity() {
         this.binding = ActivityInsertCommentBinding.inflate(this.layoutInflater)
         setContentView(binding.root)
 
+        NetworkUtils.registerNetworkChangeListener(this, this)
+
         this.binding.sendCommentBtn.setOnClickListener {
             this.closeKeyboard(this.binding.contentTIET)
             loadingDialog.isCancelable = false
@@ -41,6 +44,17 @@ class InsertCommentActivity : NikeActivity() {
 
         commentListToolbar.onBackButtonClickListener = View.OnClickListener {
             finish()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        NetworkUtils.unregisterNetworkChangeListener(this)
+    }
+
+    override fun onNetworkChanged(isConnected: Boolean) {
+        if (isConnected) {
+            this.loadingDialog.dismiss()
         }
     }
 }

@@ -22,7 +22,7 @@ class ProductSearchViewModel(val productRepository: ProductRepository) : NikeVie
             .doFinally { progressBarLiveData.value = false }
             .subscribe(object : NikeSingleObserver<List<Product>>(compositeDisposable) {
                 override fun onSuccess(t: List<Product>) {
-                    productsLiveData.value = t
+                    productsLiveData.postValue(t)
                 }
             })
     }

@@ -10,14 +10,16 @@ import com.example.nikestore.data.repository.CommentRepository
 class CommentListViewModel(productId: Int, commentRepository: CommentRepository) : NikeViewModel() {
     val commentsLiveData = MutableLiveData<List<Comment>>()
     val addCommentsLiveData = MutableLiveData<Comment>()
-    var commentRepository: CommentRepository? = null
+    private var commentRepository: CommentRepository? = null
     var productId: Int? = null
     init {
-
         this.commentRepository = commentRepository
         this.productId = productId
+    }
+
+    fun getAll() {
         progressBarLiveData.value = true
-        commentRepository.getAll(productId)
+        commentRepository!!.getAll(productId!!)
             .asyncNetworkRequest()
             .doFinally { progressBarLiveData.value = false }
             .subscribe(object : NikeSingleObserver<List<Comment>>(compositeDisposable) {

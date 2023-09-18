@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.nikestore.R
+import com.example.nikestore.common.NetworkUtils
 import com.example.nikestore.common.NikeFragment
 import com.example.nikestore.common.PREFERENCES_NAME
 import com.example.nikestore.databinding.FragmentProfileBinding
@@ -42,6 +43,8 @@ class ProfileFragment : NikeFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        NetworkUtils.registerNetworkChangeListener(requireContext(), this)
+
         this.binding.favoriteProductsBtn.setOnClickListener {
             startActivity(Intent(requireContext(), FavoriteProductsActivity::class.java))
         }
@@ -71,7 +74,18 @@ class ProfileFragment : NikeFragment() {
 
     override fun onResume() {
         super.onResume()
-        checkAuthState()
+        this.checkAuthState()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        NetworkUtils.unregisterNetworkChangeListener(requireContext())
+    }
+
+    override fun onNetworkChanged(isConnected: Boolean) {
+        if (isConnected) {
+            this.loadingDialog.dismiss()
+        }
     }
 
     private fun checkAuthState() {

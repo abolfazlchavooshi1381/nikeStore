@@ -12,16 +12,20 @@ import io.reactivex.Completable
 import io.reactivex.schedulers.Schedulers
 
 class ProductDetailViewModel(
-    bundle: Bundle,
-    commentRepository: CommentRepository,
-    val cartRepository: CartRepository,
-    val productRepository: ProductRepository
+    private val bundle: Bundle,
+    private val commentRepository: CommentRepository,
+    private val cartRepository: CartRepository,
+    private val productRepository: ProductRepository
 ) : NikeViewModel() {
 
     val productLiveData = MutableLiveData<Product>()
     val commentsLiveData = MutableLiveData<List<Comment>>()
 
     init {
+        this.getAll()
+    }
+
+    fun getAll() {
         productLiveData.value = bundle.getParcelable(EXTRA_KEY_DATA)
         progressBarLiveData.value = true
         commentRepository.getAll(productLiveData.value!!.id)

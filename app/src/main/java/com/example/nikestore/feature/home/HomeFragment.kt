@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.nikestore.R
 import com.example.nikestore.common.EXTRA_KEY_DATA
+import com.example.nikestore.common.NetworkUtils
 import com.example.nikestore.common.NikeFragment
 import com.example.nikestore.data.*
 import com.example.nikestore.databinding.FragmentHomeBinding
@@ -60,6 +61,8 @@ class HomeFragment : NikeFragment(), ProductListAdapter.ProductEventListener {
     @SuppressLint("FragmentLiveDataObserve")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        NetworkUtils.registerNetworkChangeListener(requireContext(), this)
 
         homeViewModel.bannersLiveData.observe(viewLifecycleOwner) {
             Timber.i(it.toString())
@@ -195,5 +198,18 @@ class HomeFragment : NikeFragment(), ProductListAdapter.ProductEventListener {
         this.getProducts()
         homeViewModel.getBanners()
         this.productObserveAndSetListener()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        NetworkUtils.unregisterNetworkChangeListener(requireContext())
+    }
+
+    override fun onNetworkChanged(isConnected: Boolean) {
+        if (isConnected) {
+           this.loadingDialog.dismiss()
+            this.getProducts()
+            this.homeViewModel.getBanners()
+        }
     }
 }

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nikestore.R
 import com.example.nikestore.common.EXTRA_KEY_ID
+import com.example.nikestore.common.NetworkUtils
 import com.example.nikestore.common.NikeActivity
 import com.example.nikestore.common.NikeCompletableObserver
 import com.example.nikestore.common.formatPrice
@@ -35,16 +36,17 @@ import timber.log.Timber
 class ProductDetailActivity : NikeActivity(), ProductListAdapter.ProductEventListener {
 
     private lateinit var binding: ActivityProductDetailBinding
-    val productDetailViewModel: ProductDetailViewModel by viewModel { parametersOf(intent.extras) }
-    val imageLoadingService: ImageLoadingService by inject()
-    val productListAdapter: ProductListAdapter by inject { parametersOf(VIEW_TYPE_ROUND) }
-    val commentAdapter = CommentAdapter()
+    private val productDetailViewModel: ProductDetailViewModel by viewModel { parametersOf(intent.extras) }
+    private val imageLoadingService: ImageLoadingService by inject()
+    private val commentAdapter = CommentAdapter()
     val compositeDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.binding = ActivityProductDetailBinding.inflate(this.layoutInflater)
         setContentView(binding.root)
+
+        NetworkUtils.registerNetworkChangeListener(this, this)
 
         loadingDialog.isCancelable = false
         loadingDialog.show(supportFragmentManager, null)
@@ -130,6 +132,13 @@ class ProductDetailActivity : NikeActivity(), ProductListAdapter.ProductEventLis
     override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.clear()
+        NetworkUtils.unregisterNetworkChangeListener(this)
+    }
+    override fun onNetworkChanged(isConnected: Boolean) {
+        if (isConnected) {
+            this.loadingDialog.dismiss()
+            this.productDetailViewModel.getAll()
+        }
     }
 
     override fun onProductClick(product: Product) {

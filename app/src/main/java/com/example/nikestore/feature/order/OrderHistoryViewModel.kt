@@ -7,10 +7,14 @@ import com.example.nikestore.common.asyncNetworkRequest
 import com.example.nikestore.data.OrderHistoryItem
 import com.example.nikestore.data.repository.OrderRepository
 
-class OrderHistoryViewModel(orderRepository: OrderRepository) : NikeViewModel() {
+class OrderHistoryViewModel(private val orderRepository: OrderRepository) : NikeViewModel() {
     val orders = MutableLiveData<List<OrderHistoryItem>>()
 
     init {
+        this.getOrderHistory()
+    }
+
+    fun getOrderHistory() {
         progressBarLiveData.value = true
         orderRepository.list().asyncNetworkRequest().doFinally { progressBarLiveData.value = false }
             .subscribe(object : NikeSingleObserver<List<OrderHistoryItem>>(compositeDisposable) {

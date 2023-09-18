@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nikestore.common.NetworkUtils
 import com.example.nikestore.common.NikeActivity
 import com.example.nikestore.databinding.ActivityOrderHistoryBinding
 import com.example.nikestore.feature.common.LoadingDialog
@@ -19,6 +20,8 @@ class OrderHistoryActivity : NikeActivity() {
         this.binding = ActivityOrderHistoryBinding.inflate(this.layoutInflater)
         setContentView(binding.root)
 
+        NetworkUtils.registerNetworkChangeListener(this, this)
+
         loadingDialog.isCancelable = false
         loadingDialog.show(supportFragmentManager, null)
 
@@ -33,5 +36,17 @@ class OrderHistoryActivity : NikeActivity() {
             finish()
         }
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        NetworkUtils.unregisterNetworkChangeListener(this)
+    }
+
+    override fun onNetworkChanged(isConnected: Boolean) {
+        if (isConnected) {
+            this.loadingDialog.dismiss()
+            this.viewModel.getOrderHistory()
+        }
     }
 }

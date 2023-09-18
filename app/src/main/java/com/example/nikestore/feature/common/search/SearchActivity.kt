@@ -8,16 +8,14 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.nikestore.feature.common.LoadingDialog
-import com.example.nikestore.R
 import com.example.nikestore.common.EXTRA_KEY_DATA
+import com.example.nikestore.common.NetworkUtils
 import com.example.nikestore.common.NikeActivity
 import com.example.nikestore.common.REQUEST_CODE_SPEECH_INPUT
 import com.example.nikestore.common.convertPersianNumbersToEnglish
 import com.example.nikestore.common.onSpeechButtonClicked
 import com.example.nikestore.data.Product
 import com.example.nikestore.databinding.ActivitySearchBinding
-import com.example.nikestore.databinding.ActivityStartBinding
 import com.example.nikestore.feature.list.ProductListAdapter
 import com.example.nikestore.feature.list.VIEW_TYPE_SMALL
 import com.example.nikestore.feature.product.ProductDetailActivity
@@ -38,6 +36,8 @@ class SearchActivity : NikeActivity(), ProductListAdapter.ProductEventListener {
         this.binding = ActivitySearchBinding.inflate(this.layoutInflater)
         setContentView(binding.root)
 
+        NetworkUtils.registerNetworkChangeListener(this, this)
+
         loadingDialog.isCancelable = false
         loadingDialog.show(supportFragmentManager, null)
 
@@ -50,11 +50,6 @@ class SearchActivity : NikeActivity(), ProductListAdapter.ProductEventListener {
         viewModel.productsLiveData.observe(this) {
             Timber.i(it.toString())
             productListAdapter.products = it as ArrayList<Product>
-        }
-
-        viewModel.productsLiveData.observe(this) {
-            Timber.i(it.toString())
-            productListAdapter.main = it as ArrayList<Product>
         }
 
         this.binding.toolbarView.onBackButtonClickListener = View.OnClickListener {
@@ -101,6 +96,18 @@ class SearchActivity : NikeActivity(), ProductListAdapter.ProductEventListener {
                     Objects.requireNonNull(result)?.get(0)
                 )
             }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        NetworkUtils.unregisterNetworkChangeListener(this)
+    }
+
+    override fun onNetworkChanged(isConnected: Boolean) {
+        if (isConnected) {
+            loadingDialog.dismiss()
+            viewModel.getProducts()
         }
     }
 

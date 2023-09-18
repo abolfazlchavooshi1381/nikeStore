@@ -17,6 +17,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.nikestore.R
 import com.example.nikestore.common.AUTHENTICATION_REQUEST_PERMISSIONS
 import com.example.nikestore.common.EncoderAndDecoder
+import com.example.nikestore.common.NetworkUtils
 import com.example.nikestore.common.NikeCompletableObserver
 import com.example.nikestore.common.NikeFragment
 import com.example.nikestore.common.PREFERENCES_NAME
@@ -55,6 +56,9 @@ class LoginFragment : NikeFragment() {
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        NetworkUtils.registerNetworkChangeListener(requireContext(), this)
+
         this.loadPreferences(false)
         if (!this.isBiometricAuthSupported()) {
             this.binding.savePasswordCb.isEnabled = false
@@ -70,6 +74,17 @@ class LoginFragment : NikeFragment() {
 
         this.binding.fingerprintAnimation.setOnClickListener {
             this.loadPreferences(true)
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        NetworkUtils.unregisterNetworkChangeListener(requireContext())
+    }
+
+    override fun onNetworkChanged(isConnected: Boolean) {
+        if (isConnected) {
+            loadingDialog.dismiss()
         }
     }
 

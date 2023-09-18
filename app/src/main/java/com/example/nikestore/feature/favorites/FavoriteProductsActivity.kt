@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nikestore.R
 import com.example.nikestore.common.EXTRA_KEY_DATA
+import com.example.nikestore.common.NetworkUtils
 import com.example.nikestore.common.NikeActivity
 import com.example.nikestore.data.Product
 import com.example.nikestore.databinding.ActivityFavoriteProductsBinding
@@ -29,6 +30,8 @@ class FavoriteProductsActivity : NikeActivity(),
         loadingDialog.isCancelable = false
         loadingDialog.show(supportFragmentManager, null)
 
+        NetworkUtils.registerNetworkChangeListener(this, this)
+
         this.binding.helpBtn.setOnClickListener {
             showToast(this@FavoriteProductsActivity, getString(R.string.favorites_help_message), Toast.LENGTH_LONG)
         }
@@ -49,6 +52,18 @@ class FavoriteProductsActivity : NikeActivity(),
             finish()
         }
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        NetworkUtils.unregisterNetworkChangeListener(this)
+    }
+
+    override fun onNetworkChanged(isConnected: Boolean) {
+        if (isConnected) {
+            loadingDialog.dismiss()
+            viewModel.getFavoriteProducts()
+        }
     }
 
     override fun onClick(product: Product) {

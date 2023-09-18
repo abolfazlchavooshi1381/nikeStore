@@ -34,7 +34,7 @@ class ProductListViewModel(var sort: Int, val productRepository: ProductReposito
             .doFinally { progressBarLiveData.value = false }
             .subscribe(object : NikeSingleObserver<List<Product>>(compositeDisposable) {
                 override fun onSuccess(t: List<Product>) {
-                    productsLiveData.value = t
+                    productsLiveData.postValue(t)
                 }
             })
     }

@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import com.example.nikestore.R
+import com.example.nikestore.common.NetworkUtils
 import com.example.nikestore.common.NikeActivity
 import com.example.nikestore.common.convertDpToPixel
 import com.example.nikestore.common.setupWithNavController
@@ -28,10 +29,10 @@ class MainActivity : NikeActivity() {
         super.onCreate(savedInstanceState)
         this.binding = ActivityMainBinding.inflate(this.layoutInflater)
         setContentView(binding.root)
-
         if (savedInstanceState == null) {
-            setupBottomNavigationBar()
+            this.setupBottomNavigationBar()
         }
+        NetworkUtils.registerNetworkChangeListener(this, this)
     }
 
     override fun attachBaseContext(newBase: Context?) {
@@ -63,6 +64,16 @@ class MainActivity : NikeActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return currentNavController?.value?.navigateUp() ?: false
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        NetworkUtils.unregisterNetworkChangeListener(this)
+    }
+
+    override fun onNetworkChanged(isConnected: Boolean) {
+        this.loadingDialog.dismiss()
+        this.viewModel.getCartItemsCount()
     }
 
     @SuppressLint("ResourceType")

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nikestore.R
 import com.example.nikestore.common.EXTRA_KEY_DATA
+import com.example.nikestore.common.NetworkUtils
 import com.example.nikestore.common.NikeCompletableObserver
 import com.example.nikestore.common.NikeFragment
 import com.example.nikestore.data.CartItem
@@ -55,6 +56,8 @@ class CartFragment: NikeFragment(), CartItemAdapter.CartItemViewCallbacks {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        NetworkUtils.registerNetworkChangeListener(requireContext(), this)
+
         viewModel.cartItemsLiveData.observe(viewLifecycleOwner) {
             Timber.i(it.toString())
             this.binding.cartItemsRv.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
@@ -93,6 +96,18 @@ class CartFragment: NikeFragment(), CartItemAdapter.CartItemViewCallbacks {
             startActivity(Intent(requireContext(), ShippingActivity::class.java).apply {
                 putExtra(EXTRA_KEY_DATA, viewModel.purchaseDetailLiveData.value)
             })
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        NetworkUtils.unregisterNetworkChangeListener(requireContext())
+    }
+
+    override fun onNetworkChanged(isConnected: Boolean) {
+        if (isConnected) {
+            loadingDialog.dismiss()
+            viewModel.refresh()
         }
     }
 
