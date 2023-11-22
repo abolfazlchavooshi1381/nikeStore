@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
@@ -28,8 +29,10 @@ import com.example.nikestore.R
 import com.example.nikestore.feature.aboutUs.SharedViewModel
 import com.example.nikestore.feature.auth.AuthActivity
 import com.example.nikestore.feature.common.LoadingDialog
+import com.example.nikestore.feature.dialog.AskQuestionFromUserFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
+import com.example.nikestore.data.helperInterface.IFragmentAskQuestionClickListener
 import io.reactivex.disposables.CompositeDisposable
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -37,7 +40,7 @@ import org.greenrobot.eventbus.ThreadMode
 import java.util.concurrent.atomic.AtomicBoolean
 
 
-abstract class NikeFragment : Fragment(), NikeView, NetworkUtils.NetworkChangeListener {
+abstract class NikeFragment : Fragment(), NikeView {
     override val rootView: CoordinatorLayout?
         get() = view as CoordinatorLayout
 
@@ -57,7 +60,7 @@ abstract class NikeFragment : Fragment(), NikeView, NetworkUtils.NetworkChangeLi
     }
 }
 
-abstract class NikeActivity : AppCompatActivity(), NikeView, NetworkUtils.NetworkChangeListener {
+abstract class NikeActivity : AppCompatActivity(), NikeView {
     override val rootView: CoordinatorLayout?
         get() = window.currentFocus?.rootView as CoordinatorLayout?
 
@@ -149,6 +152,34 @@ interface NikeView {
 
     fun showToast(context: Context, message: String, duration: Int = Toast.LENGTH_SHORT) {
         Toast.makeText(context, message, duration).show()
+    }
+
+    fun showQuestionFragment(
+        headerQuestionText: String,
+        bodyQuestionText: String,
+        animationResource: Int,
+        positiveButtonText: Int,
+        negativeButtonText: Int,
+        fragmentManager: FragmentManager,
+        listener: IFragmentAskQuestionClickListener,
+        isCancelable: Boolean = true
+    ) {
+        rootView?.let { rootView ->
+            viewContext?.let { viewContext ->
+                val questionFragment = AskQuestionFromUserFragment(
+                    listener,
+                    headerQuestionText,
+                    bodyQuestionText,
+                    animationResource,
+                    positiveButtonText,
+                    negativeButtonText,
+                    isCancelable,
+                    rootView,
+                    viewContext
+                )
+                questionFragment.show(fragmentManager, null)
+            }
+        }
     }
 }
 

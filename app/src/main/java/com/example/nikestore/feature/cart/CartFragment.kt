@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nikestore.R
 import com.example.nikestore.common.EXTRA_KEY_DATA
-import com.example.nikestore.common.NetworkUtils
 import com.example.nikestore.common.NikeCompletableObserver
 import com.example.nikestore.common.NikeFragment
 import com.example.nikestore.data.CartItem
@@ -22,7 +21,6 @@ import com.example.nikestore.services.ImageLoadingService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.view_cart_empty_state.emptyStateRootView
 import kotlinx.android.synthetic.main.view_cart_empty_state.view.emptyStateCtaBtn
 import kotlinx.android.synthetic.main.view_cart_empty_state.view.emptyStateMessageTv
 import org.koin.android.ext.android.inject
@@ -55,8 +53,6 @@ class CartFragment: NikeFragment(), CartItemAdapter.CartItemViewCallbacks {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        NetworkUtils.registerNetworkChangeListener(requireContext(), this)
 
         viewModel.cartItemsLiveData.observe(viewLifecycleOwner) {
             Timber.i(it.toString())
@@ -96,18 +92,6 @@ class CartFragment: NikeFragment(), CartItemAdapter.CartItemViewCallbacks {
             startActivity(Intent(requireContext(), ShippingActivity::class.java).apply {
                 putExtra(EXTRA_KEY_DATA, viewModel.purchaseDetailLiveData.value)
             })
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        NetworkUtils.unregisterNetworkChangeListener(requireContext())
-    }
-
-    override fun onNetworkChanged(isConnected: Boolean) {
-        if (isConnected) {
-            loadingDialog.dismiss()
-            viewModel.refresh()
         }
     }
 

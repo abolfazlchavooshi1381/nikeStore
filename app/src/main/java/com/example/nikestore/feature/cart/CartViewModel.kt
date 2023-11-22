@@ -83,7 +83,7 @@ class CartViewModel(private val cartRepository: CartRepository) : NikeViewModel(
             .ignoreElement()
 
     fun refresh() {
-        getCartItems()
+        this.getCartItems()
     }
 
     private fun calculateAndPublishPurchaseDetail() {

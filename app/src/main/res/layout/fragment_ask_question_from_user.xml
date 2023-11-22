@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_dialog_fragment"
+        android:layout_margin="4dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layoutDirection="rtl"
+                android:padding="16dp">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/fragmentAskQuestionFromUser_lottieAnimation"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true" />
+
+                <TextView
+                    android:id="@+id/fragmentAskQuestionFromUser_headerQuestionTextTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:textAppearance="?textAppearanceHeadline6"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/fragmentAskQuestionFromUser_lottieAnimation"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="قطعی سازی فاکتور" />
+
+                <TextView
+                    android:id="@+id/fragmentAskQuestionFromUser_bodyQuestionTextTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textAppearance="?textAppearanceBody2"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="@+id/fragmentAskQuestionFromUser_headerQuestionTextTv"
+                    app:layout_constraintStart_toStartOf="@+id/fragmentAskQuestionFromUser_headerQuestionTextTv"
+                    app:layout_constraintTop_toBottomOf="@+id/fragmentAskQuestionFromUser_headerQuestionTextTv"
+                    tools:text="آیا از قطعی سازی فاکتور مطمئن هستید؟" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout9"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="@+id/fragmentAskQuestionFromUser_headerQuestionTextTv"
+                    app:layout_constraintStart_toStartOf="@+id/fragmentAskQuestionFromUser_bodyQuestionTextTv"
+                    app:layout_constraintTop_toBottomOf="@+id/fragmentAskQuestionFromUser_bodyQuestionTextTv">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/fragmentAskQuestionFromUser_positiveBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        tools:text="بله" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/fragmentAskQuestionFromUser_negativeBtn"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        tools:text="خیر" />
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

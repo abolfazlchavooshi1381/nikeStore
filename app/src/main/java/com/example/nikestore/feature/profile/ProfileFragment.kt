@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.nikestore.R
-import com.example.nikestore.common.NetworkUtils
+import com.example.nikestore.common.NikeDialogFragment
 import com.example.nikestore.common.NikeFragment
 import com.example.nikestore.common.PREFERENCES_NAME
 import com.example.nikestore.databinding.FragmentProfileBinding
@@ -19,6 +19,7 @@ import com.example.nikestore.feature.aboutUs.AboutUsFragment
 import com.example.nikestore.feature.auth.AuthActivity
 import com.example.nikestore.feature.favorites.FavoriteProductsActivity
 import com.example.nikestore.feature.order.OrderHistoryActivity
+import com.example.nikestore.data.helperInterface.IFragmentAskQuestionClickListener
 import org.koin.android.ext.android.inject
 import kotlin.system.exitProcess
 
@@ -43,8 +44,6 @@ class ProfileFragment : NikeFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        NetworkUtils.registerNetworkChangeListener(requireContext(), this)
-
         this.binding.favoriteProductsBtn.setOnClickListener {
             startActivity(Intent(requireContext(), FavoriteProductsActivity::class.java))
         }
@@ -54,7 +53,21 @@ class ProfileFragment : NikeFragment() {
         }
 
         this.binding.deleteBiometricUserPassword.setOnClickListener {
-            this.deletePreferences()
+            this.showQuestionFragment(getString(R.string.delete_biometric_password),
+                getString(R.string.are_you_sure_you_want_to_delete_biometric_password),
+                R.raw.animation_question,
+                R.string.yes,
+                R.string.no,
+                this.childFragmentManager,
+                object : IFragmentAskQuestionClickListener {
+                    override fun onPositiveButtonCLicked() {
+                        this@ProfileFragment.deletePreferences()
+                    }
+
+                    override fun onNegativeButtonClicked(dialog: NikeDialogFragment) {
+                        dialog.dismiss()
+                    }
+                })
         }
 
         this.binding.aboutUs.setOnClickListener {
@@ -75,17 +88,6 @@ class ProfileFragment : NikeFragment() {
     override fun onResume() {
         super.onResume()
         this.checkAuthState()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        NetworkUtils.unregisterNetworkChangeListener(requireContext())
-    }
-
-    override fun onNetworkChanged(isConnected: Boolean) {
-        if (isConnected) {
-            this.loadingDialog.dismiss()
-        }
     }
 
     private fun checkAuthState() {

@@ -10,7 +10,6 @@ import com.example.nikestore.R
 import com.example.nikestore.data.Product
 import com.example.nikestore.services.ImageLoadingService
 import com.example.nikestore.view.NikeImageView
-import kotlinx.android.synthetic.main.item_favorite_product.view.listItemNumberTv
 
 class FavoriteProductsAdapter(
     val products: MutableList<Product>,

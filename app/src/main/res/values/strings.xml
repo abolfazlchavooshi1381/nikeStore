@@ -39,6 +39,7 @@
     <string name="signUp">ثبت نام</string>
     <string name="authHint">نام کاربری و رمز عبور خود را وارد کنید</string>
     <string name="delete_biometric_password">حذف رمز عبور بیومتریک</string>
+    <string name="are_you_sure_you_want_to_delete_biometric_password">آیا مایل به حذف رمز عبور بیومتریک هستید؟</string>
     <string name="delete_biometric_password_successfully">رمز بیومتریک با موفقیت حذف شد</string>
     <string name="no_log_file">فایل گزارش وجود ندارد</string>
     <string name="error_logs">فایل گزارش</string>
@@ -97,4 +98,7 @@
     <string name="please_enter_last_name">لطفا نام خانوادگی را وارد کنید</string>
     <string name="please_enter_postal_code">لطفاً سریال کد پستی معتبر وارد کنید</string>
     <string name="please_enter_valid_phone_number">لطفاً شماره موبایل معتبر وارد کنید</string>
-    <string name="please_enter_address">لطفا آدرس را مشخص کنید</string></resources>
+    <string name="please_enter_address">لطفا آدرس را مشخص کنید</string>
+    <string name="yes">بله</string>
+    <string name="no">خیر</string>
+</resources>

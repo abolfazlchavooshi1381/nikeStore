@@ -9,7 +9,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.nikestore.common.EXTRA_KEY_DATA
-import com.example.nikestore.common.NetworkUtils
 import com.example.nikestore.common.NikeActivity
 import com.example.nikestore.common.REQUEST_CODE_SPEECH_INPUT
 import com.example.nikestore.common.convertPersianNumbersToEnglish
@@ -35,8 +34,6 @@ class SearchActivity : NikeActivity(), ProductListAdapter.ProductEventListener {
         super.onCreate(savedInstanceState)
         this.binding = ActivitySearchBinding.inflate(this.layoutInflater)
         setContentView(binding.root)
-
-        NetworkUtils.registerNetworkChangeListener(this, this)
 
         loadingDialog.isCancelable = false
         loadingDialog.show(supportFragmentManager, null)
@@ -96,18 +93,6 @@ class SearchActivity : NikeActivity(), ProductListAdapter.ProductEventListener {
                     Objects.requireNonNull(result)?.get(0)
                 )
             }
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        NetworkUtils.unregisterNetworkChangeListener(this)
-    }
-
-    override fun onNetworkChanged(isConnected: Boolean) {
-        if (isConnected) {
-            loadingDialog.dismiss()
-            viewModel.getProducts()
         }
     }
 

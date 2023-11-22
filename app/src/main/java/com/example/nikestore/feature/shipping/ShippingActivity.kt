@@ -8,7 +8,6 @@ import android.view.View
 import com.example.nikestore.R
 import com.example.nikestore.common.EXTRA_KEY_DATA
 import com.example.nikestore.common.EXTRA_KEY_ID
-import com.example.nikestore.common.NetworkUtils
 import com.example.nikestore.common.NikeActivity
 import com.example.nikestore.common.NikeCompletableObserver
 import com.example.nikestore.common.NikeSingleObserver
@@ -39,8 +38,6 @@ class ShippingActivity : NikeActivity(), IPurchaseRegistered {
         super.onCreate(savedInstanceState)
         this.binding = ActivityShippingBinding.inflate(this.layoutInflater)
         setContentView(binding.root)
-
-        NetworkUtils.registerNetworkChangeListener(this, this)
 
         loadingDialog.isCancelable = false
         loadingDialog.show(supportFragmentManager, null)
@@ -216,17 +213,6 @@ class ShippingActivity : NikeActivity(), IPurchaseRegistered {
             it.forEach { catItem ->
                 this.removeItemFromCart(catItem)
             }
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        NetworkUtils.unregisterNetworkChangeListener(this)
-    }
-
-    override fun onNetworkChanged(isConnected: Boolean) {
-        if (isConnected) {
-           this.loadingDialog.dismiss()
         }
     }
 }

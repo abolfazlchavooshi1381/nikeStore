@@ -111,13 +111,6 @@ class ProductListActivity : NikeActivity(), ProductListAdapter.ProductEventListe
         mainViewModel.getCartItemsCount()
     }
 
-    override fun onNetworkChanged(isConnected: Boolean) {
-        if (isConnected) {
-            this.loadingDialog.dismiss()
-            this.viewModel.getProducts()
-        }
-    }
-
     override fun onProductClick(product: Product) {
         startActivity(Intent(this, ProductDetailActivity::class.java).apply {
             putExtra(EXTRA_KEY_DATA, product)

@@ -4,14 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.nikestore.feature.common.LoadingDialog
-import com.example.nikestore.R
 import com.example.nikestore.common.EXTRA_KEY_ID
-import com.example.nikestore.common.NetworkUtils
-import com.example.nikestore.data.Comment
 import com.example.nikestore.common.NikeActivity
+import com.example.nikestore.data.Comment
 import com.example.nikestore.databinding.ActivityCommentListBinding
-import com.example.nikestore.databinding.ActivityStartBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -31,8 +27,6 @@ class CommentListActivity : NikeActivity() {
         this.binding = ActivityCommentListBinding.inflate(this.layoutInflater)
         setContentView(binding.root)
 
-        NetworkUtils.registerNetworkChangeListener(this, this)
-
         loadingDialog.isCancelable = false
         loadingDialog.show(supportFragmentManager, null)
 
@@ -46,18 +40,6 @@ class CommentListActivity : NikeActivity() {
 
         this.binding.commentListToolbar.onBackButtonClickListener = View.OnClickListener {
             finish()
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        NetworkUtils.unregisterNetworkChangeListener(this)
-    }
-
-    override fun onNetworkChanged(isConnected: Boolean) {
-        if (isConnected) {
-            this.loadingDialog.dismiss()
-            this.viewModel
         }
     }
 }

@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.example.nikestore.BuildConfig
 import com.example.nikestore.R
-import com.example.nikestore.common.NetworkUtils
 import com.example.nikestore.common.NikeFragment
 import com.example.nikestore.common.makeUnderLine
 import com.example.nikestore.databinding.FragmentAboutUsBinding
@@ -38,21 +37,6 @@ class AboutUsFragment : NikeFragment(), IReportBottomSheetOnClickedListener {
         this.setListeners()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        NetworkUtils.unregisterNetworkChangeListener(requireContext())
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        NetworkUtils.registerNetworkChangeListener(requireContext(), this)
-    }
-
-    override fun onNetworkChanged(isConnected: Boolean) {
-        if (isConnected) {
-            loadingDialog.dismiss()
-        }
-    }
 
     private fun setListeners() {
         this.binding.aboutUsToolbar.onBackButtonClickListener = View.OnClickListener {

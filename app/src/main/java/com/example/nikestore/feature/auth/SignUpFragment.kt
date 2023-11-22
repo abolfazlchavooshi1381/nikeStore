@@ -5,16 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import com.example.nikestore.R
 import com.example.nikestore.common.NikeCompletableObserver
+import com.example.nikestore.common.NikeFragment
 import com.example.nikestore.databinding.FragmentSignUpBinding
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import org.koin.android.ext.android.inject
 
-class SignUpFragment : Fragment() {
+class SignUpFragment : NikeFragment() {
     private lateinit var binding: FragmentSignUpBinding
     val compositeDisposable = CompositeDisposable()
     val viewModel: AuthViewModel by inject()

@@ -23,7 +23,7 @@ class ProductListViewModel(var sort: Int, val productRepository: ProductReposito
     )
 
     init {
-        getProducts()
+        this.getProducts()
         selectedSortTitleLiveData.value = sortTitles[sort]
     }
 
@@ -42,7 +42,7 @@ class ProductListViewModel(var sort: Int, val productRepository: ProductReposito
     fun onSelectedSortChangedByUser(sort: Int) {
         this.sort = sort
         this.selectedSortTitleLiveData.value = sortTitles[sort]
-        getProducts()
+        this.getProducts()
     }
 
     fun addProductToFavorites(product: Product) {
