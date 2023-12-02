@@ -27,10 +27,12 @@ class CommentListActivity : NikeActivity() {
         this.binding = ActivityCommentListBinding.inflate(this.layoutInflater)
         setContentView(binding.root)
 
+        this.viewModel.getAll()
+
         loadingDialog.isCancelable = false
         loadingDialog.show(supportFragmentManager, null)
 
-        viewModel.commentsLiveData.observe(this) {
+        this.viewModel.commentsLiveData.observe(this) {
             val adapter = CommentAdapter(true)
             this.binding.commentsRv.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
             adapter.comments = it as ArrayList<Comment>
